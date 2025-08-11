@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+{% block title %}
+ Meesho twitter
+{% endblock %}
+
+{% block content%}
+<h1 class="text-center text-white mt-4"> Welcome to Meesho Twitter</h1>
+
+<h2>
+     {% if form.instance.pk %}
+    Edit tweet 
+    {% else %}
+    Create tweet
+    {% endif %}
+</h2>
+<!--enctype="multipart/form-data" Added enctype for file uploads  and images also-->
+<div class="text-center mb-4">
+<form method="post" enctype="multipart/form-data">
+    <!--csrf_token ia used because we put if form is valid in views so it needs csrf token -->
+    {% csrf_token %}
+ <!-- as.p is used to Render form fields as paragraphs for better spacing -->
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-warning">Submit</button>
+</form>
+<a href="{% url 'tweet_list' %}" class="btn btn-secondary">Back to Tweets</a>
+{% endblock %}
